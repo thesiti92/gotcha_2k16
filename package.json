@@ -1,0 +1,34 @@
+{
+  "name": "gotcha_2k16",
+  "version": "0.0.0",
+  "description": "gotcha!",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify -t [ babelify ] src/index.js -o build/app.js",
+    "debug": "browserify -t [ babelify ] src/index.js -o build/app.js|firebase serve"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/thesiti92/gotcha_2k16.git"
+  },
+  "keywords": [
+    "react",
+    "gotcha",
+    "firebase"
+  ],
+  "author": "Alex Iansiti",
+  "license": "BSD-2-Clause",
+  "bugs": {
+    "url": "https://github.com/thesiti92/gotcha_2k16/issues"
+  },
+  "dependencies": {
+    "react": "~15.3.0",
+    "react-dom": "~15.3.0",
+    "babelify": "~7.3.0",
+    "babel-preset-react": "~6.11.1",
+    "firebase": "~3.2.1",
+    "reactfire": "~1.0.0"
+  }
+}
