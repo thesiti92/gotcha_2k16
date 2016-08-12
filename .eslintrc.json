@@ -1,0 +1,29 @@
+{
+    "extends": "google",
+    "env": {
+        "browser": true,
+        "node": true
+    },
+
+    "globals": {
+        "React": true
+    },
+
+    "ecmaFeatures": {
+        "jsx": true
+    },
+
+    "plugins": [
+        "react"
+    ],
+    "rules": {
+        "indent": "off",
+        "new-cap": "off",
+        "no-unused-vars": "warn",
+        "linebreak-style": "off",
+        "max-len": "off",
+        "require-jsdoc": "off",
+        "no-trailing-spaces": "off",
+        "no-alert":"warn"
+    }
+}
