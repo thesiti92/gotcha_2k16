@@ -1,0 +1,23 @@
+{
+  "Alexander Iansiti" : {
+    "alive" : 1,
+    "code" : 696969,
+    "email" : "alexander_iansiti17@milton.edu",
+    "target" : "Marshall Sloane",
+    "target_code" : 888888
+  },
+  "Marshall Sloane" : {
+    "alive" : 1,
+    "code" : 888888,
+    "email" : "marshall_sloane17@milton.edu",
+    "target" : "Henry Westerman",
+    "target_code" : 555555
+  },
+  "Henry Westerman" : {
+    "alive" : 1,
+    "code" : 555555,
+    "email" : "henry_westerman17@milton.edu",
+    "target" : "JJ Batt",
+    "target_code" : 500000
+  }
+}
