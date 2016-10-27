@@ -1,0 +1,8 @@
+{
+  "rules": {
+      "$user": {
+        ".read": "auth.token.name === $user || root.child('admins/' + auth.token.name).exists()",
+        ".write": "auth.token.name === $user|| root.child('admins/' + auth.token.name).exists()"
+      }
+  }
+}

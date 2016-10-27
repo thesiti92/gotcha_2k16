@@ -19,11 +19,12 @@
     "rules": {
         "indent": "off",
         "new-cap": "off",
-        "no-unused-vars": "warn",
+        "no-unused-vars": "off",
         "linebreak-style": "off",
         "max-len": "off",
         "require-jsdoc": "off",
         "no-trailing-spaces": "off",
-        "no-alert":"warn"
+        "no-alert":"warn",
+        "no-unmodified-loop-condition" : "off"
     }
 }

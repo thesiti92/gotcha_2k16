@@ -1,46 +1,89 @@
 var ReactDOM = require('react-dom');
 var React = require('react');
 var UserContent = require('./userContentWrapper');
-
+var SignIn = require("./signIn");
 var firebase = require("firebase/app");
+var CircularProgress = require('material-ui/CircularProgress').default;
+var getMuiTheme = require('material-ui/styles/getMuiTheme').default;
+var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider').defualt;
+var lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme').defualt;
+var OkAlert = require('./OkAlert');
+var blue5 = require('material-ui/styles/colors').blue500;
+var blue6 = require('material-ui/styles/colors').blue600;
+var YesNoAlert = require('./YesNoAlert');
+var AdminConsole = require('./AdminConsole.js');
+
+var Drawer = require('material-ui/Drawer').default;
 require("firebase/auth");
 firebase.initializeApp(require("./config"));
-var provider = new firebase.auth.GoogleAuthProvider();
+var injectTapEventPlugin = require("react-tap-event-plugin");
+const muiTheme = getMuiTheme({
+    palette: {
+        primary1Color: blue5,
+        primary2Color: blue6
+    }
+});
+var blue = require('material-ui/styles/colors').blue900;
+injectTapEventPlugin();
 
-var signIn = function() {
-    firebase.auth().signInWithPopup(provider).then(function(result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = result.credential.accessToken;
-    }).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        console.log([errorCode, errorMessage, email, credential]);
-        signIn();
-    });
-};
-
+var App = React.createClass({
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
+    getChildContext() {
+        return {muiTheme: muiTheme};
+    },
+    getInitialState: function() {
+        return {open: false};
+    },
+    handleToggle: function() {
+        this.setState({
+            open: !this.state.open
+        });
+        console.log(this.state.open);
+    },
+    requestChange: function(open, reason) {
+        this.setState({open: open});
+        console.log(reason);
+        console.log(this.state.open);
+    },
+    render: function() {
+        var content;
+        if (this.props.mode === "signIn") {
+            content = <SignIn/>;
+        } else if (this.props.mode === "loggedIn") {
+            content = <UserContent keyName={this.props.user}/>;
+        } else if (this.props.mode === "loading") {
+            content = <CircularProgress/>;
+        }
+        return (content);
+    }
+});
 firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
         if (user.email.includes("milton.edu")) {
             // User is signed in.
-            loggedIn(user);
+            ReactDOM.render(
+                <App user={user.displayName} mode="loggedIn"/>, document.getElementById('app'));
+            firebase.database().ref('admins/' + user.displayName).once('value').then(function() {
+                ReactDOM.render(
+                    <YesNoAlert prompt="Open Admin Console?" muiTheme={muiTheme} yesAct={function() {
+                    console.log('yeah');
+                    ReactDOM.render(
+                        <AdminConsole/>, document.getElementById('app'));
+                }}/>, document.getElementById('alert'));
+            });
         } else {
-            alert("You Must Have  Milton.edu Email!");
             user.delete();
-            signIn();
+            ReactDOM.render(
+                <OkAlert prompt="Please Use An @milton.edu Email Address" muiTheme={muiTheme}/>, document.getElementById('alert'));
         }
     } else {
         // No user is signed in.
         ReactDOM.render(
-            <button onClick={signIn}>Sign In</button>, document.getElementById('app'));
+            <App mode="signIn"/>, document.getElementById('app'));
     }
 });
-function loggedIn(user) {
-    ReactDOM.render(
-        <UserContent/>, document.getElementById('app'));
-}
+
+ReactDOM.render(
+    <App mode="loading"/>, document.getElementById('app'));
