@@ -1,8 +1,12 @@
 var Dialog = require('material-ui/Dialog').default;
 var FlatButton = require('material-ui/FlatButton').default;
 var React = require('react');
+var lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme').defualt;
+var getMuiTheme = require('material-ui/styles/getMuiTheme').default;
+var YesNoAlert = require('./YesNoAlert');
 
-var OkAlert = React.createClass({
+
+var YesNoAlert = React.createClass({
     getInitialState: function() {
         return ({open: true});
     },
@@ -10,7 +14,7 @@ var OkAlert = React.createClass({
         muiTheme: React.PropTypes.object
     },
     getChildContext() {
-        return {muiTheme: this.props.muiTheme};
+        return {muiTheme: getMuiTheme(lightBaseTheme)};
     },
     yes: function() {
       this.props.yesAct();
@@ -29,4 +33,4 @@ var OkAlert = React.createClass({
         );
     }
 });
-module.exports = OkAlert;
+module.exports = YesNoAlert;

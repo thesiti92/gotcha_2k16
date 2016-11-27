@@ -1,7 +1,0 @@
-currentUser:
-1. change alive to 0 CHECK
-with target:
-1. update attacker
-with attacker:
-1. increment tag
-2. update target

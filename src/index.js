@@ -1,12 +1,10 @@
 var ReactDOM = require('react-dom');
 var React = require('react');
-var UserContent = require('./userContentWrapper');
-var SignIn = require("./signIn");
+var UserContent = require('./UserContentWrapper');
+var SignIn = require("./SignIn");
 var firebase = require("firebase/app");
 var CircularProgress = require('material-ui/CircularProgress').default;
 var getMuiTheme = require('material-ui/styles/getMuiTheme').default;
-var MuiThemeProvider = require('material-ui/styles/MuiThemeProvider').defualt;
-var lightBaseTheme = require('material-ui/styles/baseThemes/lightBaseTheme').defualt;
 var OkAlert = require('./OkAlert');
 var blue5 = require('material-ui/styles/colors').blue500;
 var blue6 = require('material-ui/styles/colors').blue600;
@@ -23,6 +21,10 @@ const muiTheme = getMuiTheme({
         primary2Color: blue6
     }
 });
+const middle = {
+  top:"50%",
+  left:"50%"
+};
 var blue = require('material-ui/styles/colors').blue900;
 injectTapEventPlugin();
 
@@ -54,12 +56,13 @@ var App = React.createClass({
         } else if (this.props.mode === "loggedIn") {
             content = <UserContent keyName={this.props.user}/>;
         } else if (this.props.mode === "loading") {
-            content = <CircularProgress/>;
+            content = <CircularProgress style={middle}/>;
         }
         return (content);
     }
 });
 firebase.auth().onAuthStateChanged(function(user) {
+  try{
     if (user) {
         if (user.email.includes("milton.edu")) {
             // User is signed in.
@@ -68,11 +71,10 @@ firebase.auth().onAuthStateChanged(function(user) {
             firebase.database().ref('admins/' + user.displayName).once('value').then(function() {
                 ReactDOM.render(
                     <YesNoAlert prompt="Open Admin Console?" muiTheme={muiTheme} yesAct={function() {
-                    console.log('yeah');
                     ReactDOM.render(
                         <AdminConsole/>, document.getElementById('app'));
                 }}/>, document.getElementById('alert'));
-            });
+            }, function(error){console.log("Not Admin");});
         } else {
             user.delete();
             ReactDOM.render(
@@ -83,6 +85,10 @@ firebase.auth().onAuthStateChanged(function(user) {
         ReactDOM.render(
             <App mode="signIn"/>, document.getElementById('app'));
     }
+  }
+  catch (e) {
+     console.error(e)
+  }
 });
 
 ReactDOM.render(

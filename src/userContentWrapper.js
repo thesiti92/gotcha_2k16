@@ -1,30 +1,36 @@
 var React = require('react');
 var firebase = require("firebase/app");
 require("firebase/database");
-var CircularProgress = require('material-ui/CircularProgress').default;
 var reactfire = require('reactfire');
-var DbButton = require('./resetDb');
 var NavBar = require('./NavBar');
 var NavDrawer = require('./NavDrawer');
-var YesNoAlert = require('./YesNoAlert');
-var AdminConsole = require('./AdminConsole');
 var Home = require('./Home');
-// var Info = require('./Info');
-// var Help = require('./Help');
-// var Leaderboard = require('./Leaderboard');
+var About = require('./About');
+var Rules = require('./Rules');
+var Leaderboard = require('./Leaderboard');
 const tabs = {
     home: <Home/>,
-    info: "info",
-    help: 'help',
-    leader: "leader"
+    about: <About/>,
+    rules: <Rules/>,
+    leader: <Leaderboard/>
 };
 
 var UserContent = React.createClass({
     mixins: [reactfire],
     getInitialState: function() {
         this.db = firebase.database();
+        return {tab: "home", open: false};
+    },
+    componentWillMount: function() {
+        try {
+          var myPrivRef = this.db.ref("private").child(this.props.keyName);
+          this.bindAsObject(myPrivRef, "privateUser");
+          var myPubRef = this.db.ref("public").child(this.props.keyName);
+          this.bindAsObject(myPubRef, "publicUser");
 
-        return {user: {}, tab: "home", open: false};
+        } catch (e) {
+           console.error(e)
+        }
     },
     changeTab: function(tab) {
         this.setState({tab: tab});
@@ -38,22 +44,14 @@ var UserContent = React.createClass({
     requestChange: function(open, reason) {
         this.setState({open: open});
     },
-    componentWillMount: function() {
-        var myRef = this.db.ref(this.props.keyName);
-        this.bindAsObject(myRef, "user");
-        this.firebaseRefs.user.on('child_changed', function(snapshot) {
-            if (snapshot.val() === 0) {
-                alert("you got got bruh");
-            }
-        });
-    },
-
     render: function() {
-        var content = React.cloneElement(tabs[this.state.tab], {user: this.state.user});
+        var fullUser = Object.assign({},this.state.publicUser, this.state.privateUser);
+        var content = React.cloneElement(tabs[this.state.tab], {user: fullUser});
         return (
             <div>
-                <NavBar user={this.state.user} handleToggle={this.handleToggle}/>
-                <NavDrawer open={this.state.open} tab={this.state.tab} changeTab={this.changeTab} user={this.state.user} onRequestChange={this.requestChange}/> {content}
+                <NavBar user={fullUser} handleToggle={this.handleToggle}/>
+                <NavDrawer open={this.state.open} tab={this.state.tab} changeTab={this.changeTab} user={fullUser} onRequestChange={this.requestChange}/>
+                {content}
             </div>
         );
     }

@@ -1,6 +1,26 @@
+
 {
-    "rules": {
-        ".read": true,
-        ".write": true
+  "rules": {
+    ".read": "root.child('admins/' + auth.token.name).exists()",
+    ".write":"root.child('admins/' + auth.token.name).exists()",
+    "private":{
+      "$user": {
+        ".read": "auth.token.name === $user",
+        ".write": "auth.token.name === $user"
+      }
+    },
+    "public":
+    {
+      ".read": "auth != null",
+      ".indexOn": ["tags", "taggedAt"],
+      "$user": {
+        ".write": "auth.token.name === $user",
+        ".indexOn": ["tags", "taggedAt"]
+      }
+    },
+    "classStats":{
+    ".read": "auth!=null",
+    ".write": "auth!=null"
     }
+  }
 }

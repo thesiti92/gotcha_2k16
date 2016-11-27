@@ -1,11 +1,19 @@
 var React = require('react');
-var firebase = require("firebase/app");
-require("firebase/auth");
 var ResetDb = require('./resetDb');
+var AdminTag = require('./AdminTag');
+var AdminSwitch = require('./AdminSwitch');
+
 
 var AdminConsole = React.createClass({
+
     render: function() {
-        return (<ResetDb/>);
+        return (
+          <div>
+            <AdminTag/>
+            <ResetDb/>
+            <AdminSwitch/>
+          </div>
+        );
     }
 });
 

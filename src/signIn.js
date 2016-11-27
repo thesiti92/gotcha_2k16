@@ -22,17 +22,33 @@ var GIcon = React.createClass({
 });
 var GotchaText = React.createClass({
     getDefaultProps: function() {
+      if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)){
         return {
             txtStyle: {
                 position: "absolute",
                 top: "140px",
                 margin: 'auto',
+                left: "9%",
                 fontWeight: "bold",
                 fontSize: "xx-large",
                 color: orange
             }
 
+
         };
+      }
+        else{
+          return {
+              txtStyle: {
+                  position: "absolute",
+                  top: "140px",
+                  margin: 'auto',
+                  fontWeight: "bold",
+                  fontSize: "xx-large",
+                  color: orange
+              }
+          };
+        }
     },
     render: function() {
         return (
@@ -74,8 +90,7 @@ var SignIn = React.createClass({
 var SignInButton = React.createClass({
     signIn: function() {
         firebase.auth().signInWithPopup(provider).then(function(result) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var email = result.email;
+
         }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;

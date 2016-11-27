@@ -2,7 +2,7 @@ var React = require('react');
 var Drawer = require('material-ui/Drawer').default;
 var MenuItem = require('material-ui/MenuItem').default;
 var LeaderIcon = require('material-ui/svg-icons/action/trending-up').default;
-var InfoIcon = require('material-ui/svg-icons/action/info').default;
+var AboutIcon = require('material-ui/svg-icons/action/info').default;
 var HelpIcon = require('material-ui/svg-icons/action/help').default;
 var HomeIcon = require('material-ui/svg-icons/action/home').default;
 var Divider = require('material-ui/Divider').default;
@@ -29,16 +29,16 @@ var NavDrawer = React.createClass({
         };
         var cTab = this.props.changeTab;
         return (
-            <Drawer docked={false} width={250} open={this.props.open} onRequestChange={this.props.onRequestChange}>
+            <Drawer docked={false} width={250} open={this.props.open} onRequestChange={this.props.onRequestChange} swipeAreaWidth={200}>
                 <div style={spacer}/>
                 <Divider style={divider}/>
                 <MenuItem primaryText="Home" id="home" style={Object.assign(clone(itemStyle), focused.home)} leftIcon={< HomeIcon />} onTouchTap={cTab.bind(null, "home")}/>
                 <Divider style={divider}/>
                 <MenuItem primaryText="Leaderboard" style={Object.assign(clone(itemStyle), focused.leader)} leftIcon={< LeaderIcon />} onTouchTap={cTab.bind(null, "leader")}/>
                 <Divider style={divider}/>
-                <MenuItem primaryText="Help" style={Object.assign(clone(itemStyle), focused.help)} leftIcon={< HelpIcon />} onTouchTap={cTab.bind(null, "help")}/>
+                <MenuItem primaryText="Rules" style={Object.assign(clone(itemStyle), focused.rules)} leftIcon={< HelpIcon />} onTouchTap={cTab.bind(null, "rules")}/>
                 <Divider style={divider}/>
-                <MenuItem primaryText="About" style={Object.assign(clone(itemStyle), focused.info)} leftIcon={< InfoIcon />} onTouchTap={cTab.bind(null, "info")}/>
+                <MenuItem primaryText="About" style={Object.assign(clone(itemStyle), focused.about)} leftIcon={< AboutIcon />} onTouchTap={cTab.bind(null, "about")}/>
                 <Divider style={divider}/>
             </Drawer>
         );
