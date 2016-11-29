@@ -1,4 +1,5 @@
 var React = require('react');
+var ReactDOM = require('react-dom');
 var Paper = require("material-ui/Paper").default;
 var CircularProgress = require('material-ui/CircularProgress').default;
 var firebase = require("firebase/app");
@@ -39,6 +40,10 @@ var DeadGraph = React.createClass({
       var statRef = firebase.database().ref('classStats');
       this.bindAsArray(statRef, "stats");
     },
+    componentDidMount: function(){
+      this.graphWidth = ReactDOM.findDOMNode(this).getBoundingClientRect().width
+      this.graphHeight = ReactDOM.findDOMNode(this).getBoundingClientRect().height
+    },
     render: function() {
       var stats = this.state.stats;
       var content;
@@ -63,8 +68,8 @@ var DeadGraph = React.createClass({
             type: 'pie'
             }];
         var layout = {
-          width:400,
-          height:400,
+          height: this.graphHeight,
+          width: this.graphWidth,
           title: 'Students Out by Class',
           showlegend: false,
           font: {

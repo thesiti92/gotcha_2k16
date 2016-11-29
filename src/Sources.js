@@ -5,17 +5,14 @@ var Sources = React.createClass({
   getDefaultProps: function() {
       return {
           paperStyle: {
-              height: '330px',
-              width: '86%',
+              width: '85%',
               margin: 'auto',
-              position: 'absolute',
-              top: '250px',
-              left: '7%',
+              position: 'relative',
+              top: '3em',
               textAlign: 'left',
               display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
               lineHeight:'200%',
+              fontSize: '1.8vmax'
           }
       };
     },
@@ -23,7 +20,8 @@ var Sources = React.createClass({
     render: function() {
       return (
         <Paper style={this.props.paperStyle} zDepth={5}>
-        <h3 style={{position:'absolute', top:0}}>... And These Handy Tools</h3>
+        <h3 style={{position:'absolute', margin:0, width:'100%', textAlign:'center'}}>... And These Handy Tools</h3>
+        <div style={{position:'relative', marginLeft:5, marginTop:'2em', marginBottom:'1em'}}>
         React: A Modular, Flexible UI Framework From Facebook
         <br/>
         Material-UI: A Set of React Components Using Google&#39;s Material Design Spec
@@ -37,6 +35,7 @@ var Sources = React.createClass({
         Node.js: A Javascript Runtime Environment that Makes it All Happen
         <br/>
         Browserify: A Javascript Packager that Lets Me Write Pretty Code
+        </div>
       </Paper>
       );
     }

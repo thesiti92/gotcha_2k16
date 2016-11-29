@@ -18,6 +18,7 @@ var Leaderboard = React.createClass({
         display: 'flex',
         justifyContent: 'center',
         overflowY: "scroll",
+        overflowX: 'hidden',
         alignItems: 'center'
       }
     };

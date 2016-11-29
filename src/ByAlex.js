@@ -7,21 +7,20 @@ var ByAlex = React.createClass({
   getDefaultProps: function() {
       return {
           paperStyle: {
-              height: '75px',
               width: '70%',
               margin: 'auto',
-              position: 'absolute',
-              top: '100px',
-              left: '15%',
+              position: 'relative',
+              top: '.2em',
               textAlign: 'center',
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              fontSize: '5vw'
           },
           iconStyle: {
-            height:60,
-            width:60,
-            top:15,
+            height:'2em',
+            width:'2em',
+            top:'.5em',
             position: 'relative',
             marginRight: 7.5,
             marginLeft:7.5
@@ -32,10 +31,10 @@ var ByAlex = React.createClass({
     render: function() {
       return (
         <Paper style={this.props.paperStyle} zDepth={5}>
-        <div style={{fontSize: "5vw", position:"relative", bottom:10}}>
-          <Code style={Object.assign({},this.props.iconStyle, {color: 'rgb(96,125,139)'})}/>
+        <div style={{position:"relative", bottom:10}}>
+          <Code preserveAspectRatio='xMidYMid meet' style={Object.assign({},this.props.iconStyle, {color: 'rgb(96,125,139)'})}/>
           With
-          <Heart style={Object.assign({},this.props.iconStyle, {color: 'rgb(245,124,0)'})}/>
+          <Heart preserveAspectRatio='xMidYMid meet' style={Object.assign({},this.props.iconStyle, {color: 'rgb(245,124,0)'})}/>
           by
           Alex Iansiti
         </div>
