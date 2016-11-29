@@ -21,7 +21,7 @@ var TagLeaderboard = React.createClass({
               width: '80%',
               margin: 'auto',
               position: 'absolute',
-              top: '200px',
+              top: '300px',
               left: '10%',
               textAlign: 'center',
               display: 'flex',
@@ -41,7 +41,7 @@ var TagLeaderboard = React.createClass({
     render: function() {
       var peopleTags = this.state.peopleTags.slice().reverse();
       var content = (<Table selectable={false} height="350px">
-          <TableHeader displaySelectAll={false}>
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
             <TableHeaderColumn>Rank</TableHeaderColumn>
               <TableHeaderColumn>Name</TableHeaderColumn>

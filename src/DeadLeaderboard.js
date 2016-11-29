@@ -11,7 +11,14 @@ var TableRowColumn = TableItems.TableRowColumn;
 var firebase = require("firebase/app");
 require("firebase/database");
 var reactfire = require('reactfire');
-
+const weekdays = [
+"Sunday",
+"Monday",
+"Tuesday",
+"Wednesday",
+"Thursday",
+"Friday",
+"Saturday"]
 
 
 var DeadLeaderboard = React.createClass({
@@ -23,7 +30,7 @@ var DeadLeaderboard = React.createClass({
               width: '80%',
               margin: 'auto',
               position: 'absolute',
-              top: '650px',
+              top: '750px',
               left: '10%',
               textAlign: 'center',
               display: 'flex',
@@ -44,9 +51,10 @@ var DeadLeaderboard = React.createClass({
       var peopleDead = this.state.peopleDead.slice().reverse();
 
       var content = (<Table selectable={false} height="350px">
-          <TableHeader displaySelectAll={false}>
+          <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
+              <TableHeaderColumn>Tagged On</TableHeaderColumn>
               <TableHeaderColumn>Tagged At</TableHeaderColumn>
             </TableRow>
           </TableHeader>
@@ -60,7 +68,8 @@ var DeadLeaderboard = React.createClass({
                       return(
                        <TableRow key={index}>
                          <TableRowColumn>{person.displayName}</TableRowColumn>
-                         <TableRowColumn>{d.toLocaleString('en-US',{timeZone:'America/New_York'})}</TableRowColumn>
+                         <TableRowColumn>{weekdays[d.getDay()]}</TableRowColumn>
+                         <TableRowColumn>{d.toLocaleTimeString('en-US',{timeZone:'America/New_York', hour:'numeric', minute: 'numeric'})}</TableRowColumn>
                        </TableRow>)}
                        )}
           </TableBody>

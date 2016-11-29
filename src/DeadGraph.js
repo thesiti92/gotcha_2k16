@@ -15,7 +15,7 @@ var DeadGraph = React.createClass({
               width: '80%',
               margin: 'auto',
               position: 'absolute',
-              top: '1100px',
+              top: '1200px',
               left: '10%',
               textAlign: 'center',
               display: 'flex',

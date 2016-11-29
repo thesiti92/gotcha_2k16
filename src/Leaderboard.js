@@ -3,8 +3,7 @@ var TagLeaderboard = require('./TagLeaderboard');
 var DeadLeaderboard = require('./DeadLeaderboard');
 var PercentageOut = require('./PercentageOut');
 var DeadGraph = require('./DeadGraph');
-
-
+var FindUser = require('./FindUser');
 
 var Leaderboard = React.createClass({
   getDefaultProps: function(){
@@ -28,6 +27,7 @@ var Leaderboard = React.createClass({
       return(
         <div style={this.props.divStyle}>
         <PercentageOut/>
+        <FindUser/>
           <TagLeaderboard/>
           <DeadLeaderboard/>
           <DeadGraph/>
