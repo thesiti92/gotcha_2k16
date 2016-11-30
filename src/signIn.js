@@ -4,7 +4,7 @@ require("firebase/auth");
 var provider = new firebase.auth.GoogleAuthProvider();
 var Paper = require("material-ui/Paper").default;
 var SvgIcon = require("material-ui/SvgIcon").default;
-var RaisedButton = require("material-ui/RaisedButton").default;
+var FlatButton = require("material-ui/FlatButton").default;
 var orange = require('material-ui/styles/colors').orange300;
 var blue = require('material-ui/styles/colors').blue500;
 
@@ -22,33 +22,21 @@ var GIcon = React.createClass({
 });
 var GotchaText = React.createClass({
     getDefaultProps: function() {
-      if(Object.prototype.toString.call(window.HTMLElement).indexOf('Constructor') > 0 || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification)){
-        return {
-            txtStyle: {
-                position: "absolute",
-                top: "140px",
-                margin: 'auto',
-                left: "9%",
-                fontWeight: "bold",
-                fontSize: "xx-large",
-                color: orange
-            }
 
-
-        };
-      }
-        else{
           return {
               txtStyle: {
                   position: "absolute",
-                  top: "140px",
+                  top: "15vmax",
                   margin: 'auto',
                   fontWeight: "bold",
-                  fontSize: "xx-large",
-                  color: orange
+                  fontSize: "3vmax",
+                  color: orange,
+                  width:'100%',
+                  left:'0%',
+                  display:'inline-block'
               }
           };
-        }
+
     },
     render: function() {
         return (
@@ -63,8 +51,8 @@ var SignIn = React.createClass({
     getDefaultProps: function() {
         return {
             paperStyle: {
-                height: '550px',
-                width: '550px',
+                height: '50vmax',
+                width: '50vmax',
                 margin: 'auto',
                 position: 'fixed',
                 top: '50%',
@@ -88,7 +76,8 @@ var SignIn = React.createClass({
     }
 });
 var SignInButton = React.createClass({
-    signIn: function() {
+    signIn: function(e) {
+        e.preventDefault();
         firebase.auth().signInWithPopup(provider).then(function(result) {
 
         }).catch(function(error) {
@@ -104,7 +93,7 @@ var SignInButton = React.createClass({
     },
     render: function() {
         var icon = <GIcon/>;
-        return (<RaisedButton label="Sign In With Google" icon={icon} onTouchTap={this.signIn}/>);
+        return (<FlatButton backgroundColor={"white"} hoverColor={"rgb(176,190,197)"} label="Sign In With Google" icon={icon} onTouchTap={this.signIn}/>);
     }
 });
 

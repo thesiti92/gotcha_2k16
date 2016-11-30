@@ -6,23 +6,35 @@ var IconButton = require('material-ui/IconButton').default;
 var GotIcon = require('material-ui/svg-icons/action/pan-tool').default;
 var Alert = require("./YesNoAlertBasic");
 var cyan = require('material-ui/styles/colors').cyan400;
+var Paper = require('material-ui/Paper').default;
 
 const styles = {
   mediumIcon: {
-    width: 48,
-    height: 48,
-    color: "white"
+    width: '8vmax',
+    height: '8vmax',
+    maxWidth: 120,
+    maxHeight:120,
+    color: "white",
+    zIndex:6
   },
   medium: {
-    position: 'fixed',
-    bottom: "25px",
-    right: "25px",
-    width: 96,
-    height: 96,
+    width: "15vmax",
+    height: "15vmax",
+    maxWidth: 200,
+    maxHeight:200,
     padding: 24,
-    borderRadius: "60px",
-    backgroundColor: cyan
+    borderRadius: "100%",
+    backgroundColor: cyan,
+    zIndex:5,
+    cursor: 'pointer'
   },
+  paper:{
+    position: 'fixed',
+    bottom: "3%",
+    right: "3%",
+    zIndex:4,
+    cursor: 'pointer'
+  }
 };
 
 
@@ -52,7 +64,8 @@ var GotchaButton = React.createClass({
           return curNum + 1;
         });
     },
-    confirm1: function() {
+    confirm1: function(e) {
+      e.preventDefault();
       this.setState({open:true, prompt: "Do you confirm you are out of Gotcha?", func: this.confirm2});
     },
     confirm2: function(){
@@ -67,9 +80,11 @@ var GotchaButton = React.createClass({
     render: function() {
         return (
           <div>
+          <Paper style={styles.paper} circle={true} zDepth={5}>
             <IconButton style={styles.medium} iconStyle={styles.mediumIcon} onTouchTap={this.confirm1}>
                 <GotIcon/>
             </IconButton>
+            </Paper>
             <Alert open={this.state.open} yes={this.state.func} close={this.close} prompt={this.state.prompt}/>
             </div>
         );

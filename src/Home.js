@@ -9,19 +9,18 @@ var Home = React.createClass({
           targetStyle: {
             fontSize: "6vw",
             position: "relative",
-            bottom: "30px"
           },
           tagStyle:{
             fontSize: "6vw",
             position: "relative",
           },
           paperStyle: {
-              height: '38%',
               width: '80%',
               margin: 'auto',
-              position: 'fixed',
-              top: '25%',
-              left: '10%',
+              maxHeight: '550px',
+              minHeight: '200px',
+              position: 'relative',
+              top: '5em',
               textAlign: 'center',
               display: 'flex',
               justifyContent: 'center',

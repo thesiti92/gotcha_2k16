@@ -56,7 +56,7 @@ var App = React.createClass({
         } else if (this.props.mode === "loggedIn") {
             content = <UserContent keyName={this.props.user}/>;
         } else if (this.props.mode === "loading") {
-            content = <CircularProgress style={middle}/>;
+            content = "";
         }
         return (content);
     }
