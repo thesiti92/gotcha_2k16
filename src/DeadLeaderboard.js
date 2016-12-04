@@ -67,8 +67,8 @@ var DeadLeaderboard = React.createClass({
             d.setUTCMilliseconds(person.taggedAt);
                       return(
                        <TableRow key={index}>
-                         <TableRowColumn style={{whiteSpace:'wrap', wordWrap: "break-word"}}>{person.displayName}</TableRowColumn>
-                         <TableRowColumn style={{whiteSpace:'wrap', wordWrap: "break-word"}}>{weekdays[d.getDay()]}</TableRowColumn>
+                         <TableRowColumn style={{whiteSpace:'wrap', wordWrap: "break-word", paddingLeft: 15, paddingRight: 15}}>{person.displayName}</TableRowColumn>
+                         <TableRowColumn style={{whiteSpace:'wrap', wordWrap: "break-word", paddingLeft: 12, paddingRight: 12}}>{weekdays[d.getDay()]}</TableRowColumn>
                          <TableRowColumn style={{whiteSpace:'wrap', wordWrap: "break-word"}}>{d.toLocaleTimeString('en-US',{timeZone:'America/New_York', hour:'numeric', minute: 'numeric'})}</TableRowColumn>
                        </TableRow>)}
                        )}

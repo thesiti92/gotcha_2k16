@@ -20,15 +20,23 @@ var ResetDbButton = React.createClass({
         var toAssign = Object.assign({}, users);
         var target;
         var attacker = "Alexander Iansiti";
+        var firstTarget
         var priv = {};
         var toReturn = {};
         priv[attacker] = {}
-        while (Object.keys(toAssign).length !== 0) {
+        while (Object.keys(toAssign).length > 0) {
             var keys = Object.keys(toAssign);
             target = keys[keys.length * Math.random() << 0];
-            priv[attacker].target = target;
             priv[target] = {};
+            if (Object.keys(toAssign).length === Object.keys(users).length) {
+              firstTarget = target;
+            }
+            priv[attacker].target = target;
             priv[attacker].targetEmail = users[target].email;
+            if (Object.keys(toAssign).length===1) {
+              priv[target].target = firstTarget
+              priv[target].targetEmail = users[firstTarget].email;
+            }
             var cipher = crypto.createCipher("aes192", users[target].email);
             var cryptacker = cipher.update(attacker, 'utf8', 'latin1');
             cryptacker += cipher.final('latin1')
@@ -42,6 +50,7 @@ var ResetDbButton = React.createClass({
             } else {
                 users[target].displayName = users[target].nick + " " + target.split(" ")[1];
             }
+            console.log(priv[attacker]);
             console.log(users[target].displayName);
             attacker = target.slice(0);
             delete toAssign[target];

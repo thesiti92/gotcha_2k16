@@ -41,8 +41,8 @@ var DeadGraph = React.createClass({
       this.bindAsArray(statRef, "stats");
     },
     componentDidMount: function(){
-      this.graphWidth = ReactDOM.findDOMNode(this).getBoundingClientRect().width
-      this.graphHeight = ReactDOM.findDOMNode(this).getBoundingClientRect().height
+      this.graphWidth = ReactDOM.findDOMNode(this).clientWidth;
+      this.graphHeight = ReactDOM.findDOMNode(this).clientHeight;
     },
     render: function() {
       var stats = this.state.stats;

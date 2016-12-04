@@ -62,8 +62,13 @@ var TagButton = React.createClass({
     var cipher = crypto.createCipher("aes192", user1.targetEmail);
     var newa = cipher.update(user2.name, "utf8", "latin1");
     newa += cipher.final("latin1");
-    //give old target new attacker
     self.db.ref('private').child(user1.target).update({attacker: newa});
+
+    var cipher = crypto.createCipher("aes192", user2.email);
+    var newa = cipher.update(a, "utf8", "latin1");
+    newa += cipher.final("latin1");
+    self.db.ref('private').child(user2.name).update({attacker: newa});
+
   },
   onSwitch1: function(event){
     this.setState({switchFromName: event.target.value});

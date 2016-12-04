@@ -37,7 +37,8 @@ var Rules = React.createClass({
         <br/>
         Tuesday-Friday: Gotcha will start at 8&#58;25am and will end at 5&#58;30pm
         <Divider/>
-        Once students are (1) at tryouts with a team or (2) at freshman study hall for actors in the Class IV play, those students may not be tagged.
+        If people are in sports practice, play practice, or play auditions, you cannot tag them.
+        Also, be aware that the library only has one door that students are allowed to use (the other doors have alarms).
         <Divider/>
         No tagging in:
         <ul style={{marginTop:0}}>

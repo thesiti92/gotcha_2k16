@@ -56,7 +56,7 @@ var TagLeaderboard = React.createClass({
                       return(
                        <TableRow key={index}>
                         <TableRowColumn>{index+1}</TableRowColumn>
-                         <TableRowColumn style={{whiteSpace:'wrap', wordWrap: "break-word"}}>{person.displayName}</TableRowColumn>
+                         <TableRowColumn style={{whiteSpace:'wrap', wordWrap: "break-word", paddingLeft: 15, paddingRight: 15}}>{person.displayName}</TableRowColumn>
                          <TableRowColumn>{person.tags}</TableRowColumn>
                        </TableRow>)}
                        )}

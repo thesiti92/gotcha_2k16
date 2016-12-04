@@ -47,6 +47,7 @@ var FindUser = React.createClass({
       this.AutoComplete = ReactDOM.findDOMNode(this);
     },
     onEnter: function(input){
+      this.setState({errorText:""});
       var self = this;
       firebase.database().ref('public').child(input).once('value').then(function(snapshot){
         if(snapshot.val()===null){
